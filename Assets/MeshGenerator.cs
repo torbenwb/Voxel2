@@ -5,29 +5,24 @@ using System.Collections.Generic;
 [CustomEditor(typeof(MeshGenerator))]
 public class MeshGeneratorEditor : Editor{
     MeshGenerator meshGenerator;
-    MeshGenerator MeshGenerator{
-        get {
-            if (meshGenerator) return meshGenerator;
-            meshGenerator = (MeshGenerator)target;
-            return meshGenerator;
-        }
-    }
-
-    int vStart = 0;
+    
 
     public override void OnInspectorGUI()
     {
+        if (!meshGenerator) meshGenerator = (MeshGenerator)target;
         base.OnInspectorGUI();
 
-        if (GUILayout.Button("Generate Rectangle")) MeshGenerator.GenerateRectangle();
-        if (GUILayout.Button("Generate Plane")) MeshGenerator.GeneratePlane();
-        if (GUILayout.Button("Generate Cube")) MeshGenerator.GenerateCube();
-        if (GUILayout.Button("Generate Voxel")) MeshGenerator.GenerateVoxel(MeshGenerator.voxelType);
+        if (GUILayout.Button("Generate Rectangle")) meshGenerator.GenerateRectangle();
+        if (GUILayout.Button("Generate Plane")) meshGenerator.GeneratePlane();
+        if (GUILayout.Button("Generate Cube")) meshGenerator.GenerateCube();
+        if (GUILayout.Button("Generate Voxel")) meshGenerator.GenerateVoxel(meshGenerator.voxelType);
     }
 
     void OnSceneGUI(){
-        for(int i = 0; i < MeshGenerator.vertices.Count; i++){
-            Handles.Label(MeshGenerator.vertices[i], $"{i}");
+        if (!meshGenerator) meshGenerator = (MeshGenerator)target;
+
+        for(int i = 0; i < meshGenerator.vertices.Count; i++){
+            Handles.Label(meshGenerator.vertices[i], $"{i}");
         }
     }
 }

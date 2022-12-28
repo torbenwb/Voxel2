@@ -51,7 +51,6 @@ public class Chunk : MonoBehaviour
         if (x < 0) tempX -= 1;
         if (z < 0) tempZ -= 1;
         
-
         targetCell.x = tempX * width;
         targetCell.y = 0;
         targetCell.z = tempZ * width;
