@@ -44,7 +44,7 @@ public class MeshGenerator : MonoBehaviour
 
     public float rectangleWidth, rectangleHeight;
     public int planeWidth = 5;
-    public float planeNoiseScale = 1f;
+    
     public Voxel.Type voxelType;
     
 
@@ -79,7 +79,7 @@ public class MeshGenerator : MonoBehaviour
 
         for (int z = 0; z <= width; z++){
             for (int x = 0; x <= width; x++){
-                vertices.Add(new Vector3(x, Mathf.PerlinNoise(x * planeNoiseScale,z * planeNoiseScale), z));
+                vertices.Add(new Vector3(x, 0f, z));
                 uvs.Add(new Vector2((float)x / (float)width, (float)z / (float)width));
             }
         }
